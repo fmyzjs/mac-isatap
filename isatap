@@ -13,7 +13,7 @@ function isatap_on {
     router=59.66.4.50
     gateway=2001:da8:200:900e::1
     prefix=2001:da8:200:900e::5efe
-    inet4=`ifconfig | grep inet | grep -v inet6 | awk '{print $2}' | grep -v "^127.0.0.1$" | grep -v "^169.254" | grep -v "^192.168" | head -n 1`
+    inet4=`ifconfig | grep "^\sinet" | grep -v "inet6" | awk '{print $2}' | grep -v "^127\.0\.0\.1$" | grep -v "^169\.254" | grep -v "^192\.168" | grep -v "^172\.{16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31}\." | grep -v "^10\." | head -n 1`
     ifconfig gif0 destroy 2>/dev/null
     ifconfig gif0 create
     inet6=$prefix:$inet4
